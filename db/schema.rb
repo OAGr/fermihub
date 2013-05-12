@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130512063557) do
+ActiveRecord::Schema.define(:version => 20130512210655) do
 
   create_table "distributions", :force => true do |t|
     t.float    "mean"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20130512063557) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "operation_id"
+    t.string   "type"
+    t.string   "name"
   end
 
   create_table "distributions_operations", :id => false, :force => true do |t|

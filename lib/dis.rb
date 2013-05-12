@@ -24,6 +24,10 @@ class Dis
     @mean.to_i
   end
 
+  def to_f
+    @mean.to_f
+  end
+
   def self.+(*items)
     items = Dis.make_dis(*items)
     means = items.map{|item| item.mean}

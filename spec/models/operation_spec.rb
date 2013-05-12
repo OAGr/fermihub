@@ -11,7 +11,7 @@ describe Operation do
 
   it { should respond_to(:operator) }
   it { should be_valid }
-
+  
   its(:operator) {should == "*"} 
 
 end

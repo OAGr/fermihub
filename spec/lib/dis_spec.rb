@@ -11,9 +11,12 @@ describe Dis do
   subject { @dis1 }
 
   its(:mean) {should == 10}
-  its(:interval) {should == 4}
-  its(:to_dis) {should == self}
   its(:to_i) {should == 10}
+  its(:to_f) {should == 10.0}
+  its(:interval) {should == 4}
+  it 'to_dis is the same' do
+    @dis1.should == @dis1.to_dis
+  end
   
   it "should add correctly" do
     addition = @dis1 + @dis2
