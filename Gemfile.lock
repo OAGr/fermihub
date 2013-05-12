@@ -177,6 +177,7 @@ DEPENDENCIES
   guard-rspec
   jquery-rails
   less-rails
+  pry
   rails (= 3.2.9)
   rb-fsevent
   rspec-rails

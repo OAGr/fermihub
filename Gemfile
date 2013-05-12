@@ -10,6 +10,7 @@ group :development, :test do
   gem 'capybara'
   gem 'rb-fsevent'
   gem 'growl'
+  gem 'pry'
 end
 
 gem 'therubyracer'

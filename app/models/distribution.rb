@@ -1,7 +1,8 @@
+require 'Dis'
 class Distribution < ActiveRecord::Base
-  include DistributionStats
-
-  attr_accessible :spread, :mean, :wideness
   has_and_belongs_to_many :outputs, :class_name => "Operation"
-  belongs_to :operation
+  attr_accessible :mean, :spread, :wideness
+  def to_dis
+    Dis.new(mean,spread,wideness)
+  end
 end
