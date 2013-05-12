@@ -1,13 +1,13 @@
 class Operation < ActiveRecord::Base
   attr_accessible :operator
-  has_one :dependent, :class_name => "Dependent", :foreign_key => "operation_id"
+  has_one :dependent, :class_name => "Dependent", :foreign_key => "operation_id", :dependent => :destroy
   has_and_belongs_to_many :inputs, :class_name => "Distribution"
+  before_create :check_dependent
+  validates_presence_of :dependent
 
   def check_dependent
     unless dependent
-      a = Dependent.new
-      a.operation = self
-      a.save
+      self.dependent = Dependent.create
     end
   end
 

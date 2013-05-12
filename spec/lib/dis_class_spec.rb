@@ -33,12 +33,10 @@ describe Dis do
     end
     context 'with 2 dis' do
       subject {Dis.*(@dis1,@dis2)}
-      its(:class) {should == Dis}
       its(:mean) {should == 200}
     end
     context 'with 1 dis, 1 int' do
       subject {Dis.*(@dis1,4)}
-      its(:class) {should == Dis}
       its(:mean) {should == (@dis1.mean * 4)}
     end
   end
@@ -51,12 +49,10 @@ describe Dis do
     end
     context 'with 2 dis' do
       subject {Dis.+(@dis1,@dis2)}
-      its(:class) {should == Dis}
       its(:mean) {should == 30}
     end
     context 'with 1 dis, 1 int' do
       subject {Dis.+(@dis1,4)}
-      its(:class) {should == Dis}
       its(:mean) {should == (@dis1.mean + 4)}
     end
   end
