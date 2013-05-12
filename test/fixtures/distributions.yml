@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  value: 1.5
+  interval: 1.5
+  wideness: 1.5
+
+two:
+  value: 1.5
+  interval: 1.5
+  wideness: 1.5
