@@ -33,13 +33,14 @@ class Operation < ActiveRecord::Base
   end
 
   def list
-    puts "inputs"
+    string = ""
+    string << "Inputs \n"
     unless inputs.nil?
-      inputs.map{|input| puts input.to_num}
+      string << inputs.map{|input| "#{input.to_num}"}.join("\n")
     end
-    puts "operator: #{operator}"
-    binding.pry
-    puts "Output: #{self.dependent.to_num}"
+    string << "\nOperator: #{operator} \n"
+    string << "Output: \n#{self.dependent.to_num}"
+    return string
   end
   def equation
     input_eq = inputs.map{|input| input.to_num}.join(' * ')

@@ -1,3 +1,17 @@
 // Place all the styles related to the Distributions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.distribution{
+  padding: 0.1em 0.4em;
+  background: #f6f6f6;
+  border-radius:0.3em;
+  border: 1px solid #ddd;
+  margin-bottom:0.4em;
+  .right{
+    float:right;
+    a{
+      color: #ccc;
+    }
+  }
+}

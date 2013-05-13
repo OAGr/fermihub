@@ -1,1 +1,49 @@
-asd asd 
+<h3> Distributions </h3>
+<div class="row">
+  <% @distributions.each do |distribution| %>
+    <div class="span2">
+    <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution}  %>
+  </div>
+<% end %>
+</div>
+</br></br>
+<h3> Operations </h3>
+<div class="row">
+  <div class="span2">
+    <h3> Inputs </h3>
+  </div>
+  <div class="span2">
+    <h3> Operator </h3>
+  </div>
+  <div class="span2">
+    <h3> Output </h3>
+  </div>
+  <div class="span5">
+    <h3> Equation </h3>
+  </div>
+</div>
+<% @operations.each do |operation| %>
+  <div class="row">
+  <div class="span2">
+    <% operation.inputs.each do |input| %>
+      <div class="row">
+      <div class="span2">
+        <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => input}  %>
+      </div><!--/row-->
+    </div><!--/row-->
+  <% end %>
+  </div>
+  <div class="span2">
+    <%= render operation %>
+  </div>
+  <div class="span2">
+    <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => operation.dependent}  %>
+  </div>
+  <div class="span5">
+    <%= operation.equation %>
+  </div>
+</div>
+<hr style="margin:0 0 2px 0">
+<% end %>
+
+
