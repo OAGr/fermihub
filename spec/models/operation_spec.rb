@@ -4,8 +4,9 @@ describe Operation do
 
   before do
     @operation = Operation.create(operator: "*")
-    @dependent = Dependent.find_by_operation_id(@operation.id)
     @inputs = [[40,5],[23,5],[12,2]].map{|a,b| Distribution.new(mean:a,spread:b)}
+    @operation.inputs = @inputs
+    @dependent = Dependent.find_by_operation_id(@operation.id)
   end
 
   subject { @operation }
