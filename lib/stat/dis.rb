@@ -20,6 +20,14 @@ class Dis
     self
   end
 
+  def standard_error
+    interval.to_f / mean.to_f
+  end
+
+  def percent_error
+    100 * standard_error
+  end
+
   def to_i
     @mean.to_i
   end
@@ -29,6 +37,8 @@ class Dis
   end
 
   def self.+(*items)
+    return items[0].clone if (items.length == 1)
+
     items = Dis.make_dis(*items)
     means = items.map{|item| item.mean}
     total_mean = means.inject{|sum,i| sum + i}
@@ -40,12 +50,15 @@ class Dis
   end
 
   def self.*(*items)
+    return items[0].clone if (items.length == 1)
+
     items = Dis.make_dis(*items)
     means = items.map{|item| item.mean}
     total_mean = means.inject{|sum,i| sum * i}
 
-    intervals = items.map{|item| item.interval}
-    total_interval = intervals.inject{|sum,i| sum * i}
+    errors = items.map{|item| item.standard_error}
+    total_error = errors.inject{|sum,i| sum + i}
+    total_interval = total_mean * total_error
 
     Dis.new(total_mean,total_interval)
   end

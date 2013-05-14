@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'Dis'
+require 'dis'
 
 describe Dis do
 
@@ -29,11 +29,15 @@ describe Dis do
     context 'with 3 dis' do
       subject {Dis.*(@dis1,@dis2,@dis3)}
       its(:class) {should == Dis}
-      its(:mean) {should == 6000}
+      its(:mean) {should == (@dis1.mean * @dis2.mean * @dis3.mean)}
     end
     context 'with 2 dis' do
       subject {Dis.*(@dis1,@dis2)}
       its(:mean) {should == 200}
+
+      total_error = 0.4 + 0.25
+      true_interval = total_error * 200
+      its(:interval) {should == true_interval}
     end
     context 'with 1 dis, 1 int' do
       subject {Dis.*(@dis1,4)}
@@ -55,5 +59,11 @@ describe Dis do
       subject {Dis.+(@dis1,4)}
       its(:mean) {should == (@dis1.mean + 4)}
     end
+    context 'with 1 dis' do
+      subject {Dis.+(@dis1)}
+      its(:mean) {should == @dis1.mean}
+      its(:interval) {should == @dis1.interval}
+    end
   end
+
 end
