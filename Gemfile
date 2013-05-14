@@ -11,6 +11,8 @@ group :development, :test do
   gem 'rb-fsevent'
   gem 'growl'
   gem 'pry'
+  gem 'therubyracer'
+  gem 'less-rails'
 end
 
 group :production do
@@ -19,8 +21,6 @@ group :production do
   gem 'heroku'
 end
 
-gem 'therubyracer'
-gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'chosen-rails'
 
