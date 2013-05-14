@@ -40,11 +40,11 @@ class OperationsController < ApplicationController
   # POST /operations
   # POST /operations.json
   def create
+    params[:operation]["inputs"] = filter_distribution_ids(params[:operation]["inputs"])
     @operation = Operation.new(params[:operation])
-
     respond_to do |format|
       if @operation.save
-        format.html { redirect_to @operation, notice: 'Operation was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Operation was successfully created.' }
         format.json { render json: @operation, status: :created, location: @operation }
       else
         format.html { render action: "new" }
@@ -57,10 +57,10 @@ class OperationsController < ApplicationController
   # PUT /operations/1.json
   def update
     @operation = Operation.find(params[:id])
-
+    params[:operation]["inputs"] = filter_distribution_ids(params[:operation]["inputs"])
     respond_to do |format|
       if @operation.update_attributes(params[:operation])
-        format.html { redirect_to @operation, notice: 'Operation was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Operation was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -88,5 +88,9 @@ class OperationsController < ApplicationController
       format.html { redirect_to root_path }
       format.json { head :no_content }
     end
+  end
+
+  def filter_distribution_ids(ids)
+    ids.reject!{|c| c.empty?}.map{|a| Distribution.find(a)}
   end
 end

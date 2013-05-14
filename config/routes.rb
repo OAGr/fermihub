@@ -2,7 +2,11 @@ Fermi::Application.routes.draw do
 
   root :to => "pages#home"
 
-  resources :distributions
+  resources :distributions do
+    member do
+      post 'destroy_connection'
+    end
+  end
 
 
   resources :operations do

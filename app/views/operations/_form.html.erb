@@ -2,15 +2,13 @@
   <div class="control-group">
     <%= f.label :operator, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :operator, :class => 'text_field' %>
+      <%= f.select(:operator, options_for_select(['+','*']))%>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :inputs, :class => 'control-label' %>
     <div class="controls">
-      <%= f.select :input_id,
-        Distribution.all.collect { |u| [u.to_s, u.id] }, {},  :multiple => true, :class => 'chzn-select'
-%>
+      <%= f.collection_select :inputs , Distribution.all, :id, :name, {}, :multiple => true, :class => 'chzn-select' %>
     </div>
   </div>
   <div class="form-actions">

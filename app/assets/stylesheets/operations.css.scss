@@ -5,13 +5,41 @@
 .operation{
   background:#fee;
   border: 1px solid #fdd;
-  padding: 0.1em 0.4em;
   border-radius:0.3em;
   margin-bottom:0.4em;
-  .right{
-    float:right;
-    a{
-      color: #ccc;
+  float:left;
+  width:100%;
+  .body{
+    font-size:30px;
+    float:left;
+    width:100%;
+    .operator{
+      text-align:center;
+      float:left;
+      width:100%;
+      font-size:30px;
+      line-height:30px;
+      color:#333;
     }
   }
+  .header{
+    float:left;
+    width:100%;
+    margin-right:0.1em;
+    background:#fdd;
+    .right{
+      margin-right:0.2em;
+      float:right;
+      a{
+        color: #aaa;
+      }
+      a:hover{
+        color: #000;
+        text-decoration:none;
+        background:none;
+      }
+
+    }
+  }
+
 }

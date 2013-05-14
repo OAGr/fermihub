@@ -1,11 +1,31 @@
-<div class="distribution <%= distribution.type.to_s.downcase %>">
-<%= distribution.to_s %>
 
-<%= distribution.to_num %>
-<span class="right">
-  <%= link_to 'e', edit_distribution_path(distribution) %>
-  <%= link_to 'd', distribution_path(distribution),
-                      :method => :delete,
-                      :confirm => 'Are you sure?'%>
-</span>
-</div>
+<div class="distribution <%= distribution.type.to_s.downcase %>">
+  <div class="header">
+    <span class="name"> <%= distribution.name || '' %> </span>
+    <span class="right">
+      <%= link_to edit_distribution_path(distribution) do %>
+        <i class="icon-pencil"></i> 
+    <% end %> 
+
+      <% if local_assigns[:operation] %>
+        <%= link_to  destroy_connection_distribution_path(distribution, :distribution => distribution.id, :operation => operation.id), :method => :destroy_connection do %>
+        <i class="icon-unlink"></i> 
+    <% end %>
+
+    <% else %>
+
+        <% if distribution.class == Independent %>
+        <%= link_to distribution_path(distribution),
+          :method => :delete,
+          :confirm => 'Are you sure?' do%>
+          <i class="icon-remove"></i> 
+        <% end %>
+        <% end %>
+        <% end %>
+        </span>
+      </div>
+
+      <div class="body">
+        <%= distribution.to_num %>
+      </div>
+    </div>

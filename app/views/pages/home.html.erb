@@ -11,16 +11,16 @@
 <h3> Operations </h3>
 <div class="row">
   <div class="span2">
-    <h3> Inputs </h3>
+    <h4> Inputs </h4>
   </div>
   <div class="span2">
-    <h3> Operator </h3>
+    <h4> Operator </h4>
   </div>
   <div class="span2">
-    <h3> Output </h3>
+    <h4> Output </h4>
   </div>
   <div class="span5">
-    <h3> Equation </h3>
+    <h4> Equation </h4>
   </div>
 </div>
 <% @operations.each do |operation| %>
@@ -29,12 +29,12 @@
     <% operation.inputs.each do |input| %>
       <div class="row">
       <div class="span2">
-        <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => input}  %>
+        <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => input, :operation => operation}  %>
       </div><!--/row-->
     </div><!--/row-->
   <% end %>
   </div>
-  <div class="span2">
+  <div class="span1">
     <%= render operation %>
   </div>
   <div class="span2">
@@ -44,7 +44,7 @@
     <%= operation.equation %>
   </div>
 </div>
-<hr style="margin:0 0 2px 0">
+<hr style="margin:30px 0 0 0; border:none">
 <% end %>
 </br>
 

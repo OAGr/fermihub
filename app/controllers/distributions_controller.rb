@@ -79,4 +79,14 @@ class DistributionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def destroy_connection
+    @distribution = Distribution.find(params[:id])
+    @operation = Operation.find(params[:operation])
+    @distribution.outputs.destroy(@operation)
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { head :no_content }
+    end
+  end
 end
