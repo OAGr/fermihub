@@ -3,16 +3,34 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .distribution{
+  margin-bottom:0.4em;
+  border-radius:0.3em;
+
   .header{
+    background: #dce7ff;
     font-size:11px;
     border-radius:0.3em 0.3em 0 0;
-    border: 1px solid #cfc;
-    border-bottom:none;
     padding:0.1em 0.3em;
     .right{
       float:right;
       a{
-        color: #aaa;
+        visibility:hidden;
+      }
+    }
+  }
+  .body{
+    background:#f7faff;
+    font-size:10px;
+    color:#555;
+    padding: 0.1em 0.4em;
+  }
+}
+.distribution:hover{
+  .header{
+    .right{
+      float:right;
+      a{
+        visibility:visible;
       }
       a:hover{
         color: #000;
@@ -21,35 +39,13 @@
       }
     }
   }
-.body{
-  font-size:10px;
-  color:#555;
-  padding: 0.1em 0.4em;
-  border-radius:0 0 0.4em 0.4em;
-  margin-bottom:0.4em;
-}
+  .body{
+  }
 }
 
 .independent{
-  .header{
-    background:#cfc;
-
-  }
-  .body{
-    background:#efe;
-    border: 1px solid #dfd;
-
-  }
 }
 
 .dependent{
-  .header{
-    background:#cfc;
-
-  }
-  .body{
-    background:#f6f6ff;
-    border: 1px solid #eef;
-  }
 }
 
