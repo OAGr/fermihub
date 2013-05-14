@@ -2,6 +2,8 @@
 
 Fermihub is an open source project and website to help people make fermi estimates.
 
+![screenshot](doc/screenshot.png)
+
 == What is a Fermi Estimate?
 
 Fermi Estimates are estimates made by combining multiple approximations, often with addition and multiplication.
