@@ -44,8 +44,21 @@
 }
 
 .independent{
+  .header{
+    background: #dce7ff;
+    }
+    .body{
+    background:#f7faff;
+    }
 }
 
 .dependent{
+    .header{
+    background: #eee;
+    }
+    .body{
+    background:#f6f6f6;
+    }
+
 }
 

@@ -1,54 +1,63 @@
-<h3> Distributions 
-<%= link_to "New", new_independent_path, :class => "btn btn-small" %>
-</h3>
 <div class="row">
-  <% @distributions.each do |distribution| %>
-    <div class="span2">
-    <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution}  %>
-  </div>
-<% end %>
-</div>
-<hr style="border: 2px solid #eee">
-<h3> Operations
-  <%= link_to "New", new_operation_path, :class => "btn btn-small" %>
-</h4>
-<div class="row">
-  <div class="span2">
-    <h5> Inputs </h5>
-  </div>
-  <div class="span1">
-    <h5> Operator </h5>
-  </div>
-  <div class="span2">
-    <h5> Output </h5>
-  </div>
-  <div class="span6 ">
-    <h5> Equation </h5>
-  </div>
-</div>
-<% @operations.each do |operation| %>
-  <div class="row">
-  <div class="span2">
-    <% operation.inputs.each do |input| %>
+  <div class="span5" style="padding-right:30px; border-right:1px solid #ccc">
+    <h3> Operations
+      <%= link_to "New", new_operation_path, :class => "btn btn-small" %>
+    </h4>
+    <div class="row">
+      <div class="span2">
+        <h5> Inputs </h5>
+      </div>
+      <div class="span1">
+        <h5> Operator </h5>
+      </div>
+      <div class="span2">
+        <h5> Output </h5>
+      </div>
+    </div>
+    <% @operations.each do |operation| %>
       <div class="row">
       <div class="span2">
-        <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => input, :operation => operation}  %>
-      </div><!--/row-->
-    </div><!--/row-->
+        <% operation.inputs.each do |input| %>
+          <div class="row">
+          <div class="span2">
+            <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => input, :operation => operation}  %>
+          </div><!--/row-->
+        </div><!--/row-->
+      <% end %>
+      </div>
+      <div class="span1">
+        <%= render operation %>
+      </div>
+      <div class="span2">
+        <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => operation.dependent}  %>
+      </div>
+    </div>
+    <hr style="margin:30px 0 0 0; border:none">
   <% end %>
   </div>
-  <div class="span1">
-    <%= render operation %>
-  </div>
-  <div class="span2">
-    <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => operation.dependent}  %>
-  </div>
   <div class="span6">
-    <%= operation.equation %>
-  </div>
-</div>
-<hr style="margin:30px 0 0 0; border:none">
-<% end %>
-</br>
+    <h3> Distributions 
+      <%= link_to "New", new_independent_path, :class => "btn btn-small" %>
+    </h3>
+    <h5> Independent Distributions  <span style="color:#666; font-weight:normal">(You can change these)</span></h5>
+    <div class="row">
+      <% @independents.each do |distribution| %>
+        <div class="span2">
+        <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution}  %>
+      </div>
+    <% end %>
+    </div>
+    <h5> Dependent Distributions <span style="color:#666; font-weight:normal">(Outputs of the operations)</span></h5>
+    <div class="row">
+      <% @dependents.each do |distribution| %>
+        <div class="span2">
+        <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution}  %>
+      </div>
+    <% end %>
+    </div>
 
+  </div>
+
+
+</div>
 
