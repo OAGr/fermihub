@@ -2,7 +2,7 @@
 
 Fermihub is an open source project and website to help people make fermi estimates.
 
-![screenshot](doc/screenshot.png)
+![screenshot](doc/images/screenshot.png)
 
 == What is a Fermi Estimate?
 
