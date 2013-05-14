@@ -3,6 +3,8 @@
     <h3> Operations
       <%= link_to "New", new_operation_path, :class => "btn btn-small" %>
     </h4>
+    <p> Operations are simple equations with multiple inputs and one output.  Add inputs by hovering over the operator and clicking "edit".  Run the operation by clicking evaluate (the gear sign) on the operator. </p>
+    <p> Right now Fermihub supports only addition and multiplication, and calculates the error poorly.  It also requires at least two inputs per operation. </p>
     <div class="row">
       <div class="span2">
         <h5> Inputs </h5>
@@ -39,6 +41,9 @@
     <h3> Distributions 
       <%= link_to "New", new_independent_path, :class => "btn btn-small" %>
     </h3>
+    <p> Think of Distributions as variables with confidence intervals.  The only confidence interval possible right now is one standard deviation, assuming gaussian distributions. </p>
+    <p> All Fermihub data is currently public and publically editable.</p>
+    <br>
     <h5> Independent Distributions  <span style="color:#666; font-weight:normal">(You can change these)</span></h5>
     <div class="row">
       <% @independents.each do |distribution| %>
