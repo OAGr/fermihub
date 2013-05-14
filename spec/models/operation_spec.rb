@@ -43,7 +43,7 @@ describe Operation do
   end
 
   context 'should produce correct dis on evaluate' do
-    subject {@operation.evaluate}
+    subject {@operation.evaluate!}
       its(:mean) {should == @product}
   end
 
