@@ -5,7 +5,14 @@ Fermi::Application.routes.draw do
   resources :distributions
 
 
-  resources :operations
+  resources :operations do
+    member do
+      post 'evaluate'
+    end
+  end
+
+  resources :dependents, :controller => "distributions", :type => "Dependent"
+  resources :independents, :controller => "distributions", :type => "Independent"
 
 
   # The priority is based upon order of creation:

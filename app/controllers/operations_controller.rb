@@ -76,7 +76,16 @@ class OperationsController < ApplicationController
     @operation.destroy
 
     respond_to do |format|
-      format.html { redirect_to operations_url }
+      format.html { redirect_to root_path }
+      format.json { head :no_content }
+    end
+  end
+
+  def evaluate
+    @operation = Operation.find(params[:id])
+    @operation.evaluate!
+    respond_to do |format|
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end

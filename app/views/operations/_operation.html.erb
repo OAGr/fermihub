@@ -2,6 +2,9 @@
 <%= operation.operator || "_" %>
 <span class="right">
   <%= link_to 'e', edit_operation_path(operation) %>
-  <%= link_to 'd', operation_path(operation) %>
+  <%= link_to 'd', operation_path(operation),
+                    :method => :delete,
+                    :confirm => "Are you sure?"%>
+<%= link_to 'Eval', evaluate_operation_path(operation), :method => :evaluate%>
 </span>
 </div>

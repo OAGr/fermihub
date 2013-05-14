@@ -1,5 +1,5 @@
 class Operation < ActiveRecord::Base
-  attr_accessible :operator
+  attr_accessible :operator, :inputs
   has_one :dependent, :class_name => "Dependent", :foreign_key => "operation_id", :dependent => :destroy
   has_and_belongs_to_many :inputs, :class_name => "Distribution"
   before_create :create_dependent
@@ -43,7 +43,7 @@ class Operation < ActiveRecord::Base
     return string
   end
   def equation
-    input_eq = inputs.map{|input| input.to_num}.join(' * ')
+    input_eq = inputs.map{|input| input.to_num}.join(" #{operator} ")
     output_eq = "(#{input_eq}) = #{dependent.to_num}"
   end
 end

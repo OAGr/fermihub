@@ -24,7 +24,7 @@ class DistributionsController < ApplicationController
   # GET /distributions/new
   # GET /distributions/new.json
   def new
-    @distribution = Distribution.new
+    @distribution = Independent.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,11 +40,10 @@ class DistributionsController < ApplicationController
   # POST /distributions
   # POST /distributions.json
   def create
-    @distribution = Distribution.new(params[:distribution])
-
+    @distribution = Independent.new(params[:independent])
     respond_to do |format|
       if @distribution.save
-        format.html { redirect_to @distribution, notice: 'Distribution was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Distribution was successfully created.' }
         format.json { render json: @distribution, status: :created, location: @distribution }
       else
         format.html { render action: "new" }
@@ -57,10 +56,10 @@ class DistributionsController < ApplicationController
   # PUT /distributions/1.json
   def update
     @distribution = Distribution.find(params[:id])
-
+    type_params = params[:distribution] || params[:independent] || params[:dependent]
     respond_to do |format|
-      if @distribution.update_attributes(params[:distribution])
-        format.html { redirect_to @distribution, notice: 'Distribution was successfully updated.' }
+      if @distribution.update_attributes(type_params)
+        format.html { redirect_to root_path, notice: 'Distribution was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,7 +75,7 @@ class DistributionsController < ApplicationController
     @distribution.destroy
 
     respond_to do |format|
-      format.html { redirect_to distributions_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end

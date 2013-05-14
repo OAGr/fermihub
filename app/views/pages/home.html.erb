@@ -5,6 +5,7 @@
     <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution}  %>
   </div>
 <% end %>
+<%= link_to "+", new_independent_path, :class => "btn btn-primary" %>
 </div>
 </br></br>
 <h3> Operations </h3>
@@ -45,5 +46,7 @@
 </div>
 <hr style="margin:0 0 2px 0">
 <% end %>
+</br>
 
+<%= link_to "+", new_operation_path, :class => "btn btn-primary" %>
 

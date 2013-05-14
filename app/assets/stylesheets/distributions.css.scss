@@ -4,9 +4,7 @@
 
 .distribution{
   padding: 0.1em 0.4em;
-  background: #f6f6f6;
   border-radius:0.3em;
-  border: 1px solid #ddd;
   margin-bottom:0.4em;
   .right{
     float:right;
@@ -15,3 +13,14 @@
     }
   }
 }
+
+.independent{
+  background:#efe;
+  border: 1px solid #dfd;
+}
+
+.dependent{
+  background:#f6f6ff;
+  border: 1px solid #eef;
+}
+
