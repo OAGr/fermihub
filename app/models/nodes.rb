@@ -8,7 +8,7 @@ class Node
     @mean = mean
     @spread = spread
     @type = type
-    @reflexive = true
+    @reflexive = false
   end
 
   def self.all
