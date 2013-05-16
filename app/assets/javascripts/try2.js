@@ -1,6 +1,6 @@
 // set up SVG for D3
 var width  = 550,
-height = 400,
+height = 500,
 colors = d3.scale.category10();
 
 var svg = d3.select('.graph')
@@ -32,14 +32,14 @@ d3.json("/nodes.json", function(error, json1) {
     .links(links)
     .size([width, height])
     .linkDistance(60)
-    .charge(-600)
+    .charge(-500)
     .on('tick', tick)
 
     // define arrow markers for graph links
     svg.append('svg:defs').append('svg:marker')
     .attr('id', 'end-arrow')
     .attr('viewBox', '0 -5 10 10')
-    .attr('refX', 6)
+    .attr('refX', 14)
     .attr('markerWidth', 10)
     .attr('markerHeight', 10)
     .attr('orient', 'auto')
@@ -125,21 +125,21 @@ d3.json("/nodes.json", function(error, json1) {
       .attr('r', function(d){
         if (d.klass === "O")
           {
-            return "8"; 
+            return "12"; 
           }
 
           else {
-            return "5";
+            return "23";
           }
       }
            )
       .style('fill', function(d) {
         if (d.type === "Dependent")
           {
-            return"#444" ;
+            return"#f6f6f6" ;
           }
           else if (d.type === "Independent"){
-            return "#adf"; 
+            return "#e8f3ff"; 
           }
           else {
             return "#f77";
@@ -158,14 +158,14 @@ d3.json("/nodes.json", function(error, json1) {
           }
 
           else {
-            return -8;
+            return -2;
           }
       })
       .attr('class', 'id')
       .text(function(d) { return d.name; });
       g.append('svg:text')
       .attr('x', 0)
-      .attr('y', -18)
+      .attr('y', 12)
       .attr('class', 'id')
       .text(function(d) { return d.mean; });
 
