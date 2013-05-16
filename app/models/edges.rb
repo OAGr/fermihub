@@ -12,10 +12,10 @@ class Edge
     edges = []
     Operation.all.each do |operation|
       operation.inputs.each do |distribution|
-        edges << Edge.new("O#{operation.id}","D#{distribution.id}")
+        edges << Edge.new( "D#{distribution.id}", "O#{operation.id}")
       end
       operation.dependent do |distribution|
-        edges << Edge.new("D#{distribution.id}", "O#{operation.id}" )
+        edges << Edge.new("O#{operation.id}", "D#{distribution.id}" )
       end
     end
     edges
