@@ -11,11 +11,9 @@ class Edge
   def self.all
     edges = []
     Operation.all.each do |operation|
-      operation.inputs.each do |distribution|
-        edges << Edge.new( "D#{distribution.id}", "O#{operation.id}")
-      end
-      operation.dependent do |distribution|
-        edges << Edge.new("O#{operation.id}", "D#{distribution.id}" )
+      edges << Edge.new("O#{operation.id}", "D#{operation.dependent.id}")
+      operation.inputs.each do |d1|
+        edges << Edge.new( "D#{d1.id}", "O#{operation.id}")
       end
     end
     edges
