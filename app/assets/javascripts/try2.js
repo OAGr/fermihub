@@ -31,7 +31,7 @@ d3.json("/nodes.json", function(error, json1) {
     .nodes(nodes)
     .links(links)
     .size([width, height])
-    .linkDistance(60)
+    .linkDistance(120)
     .charge(-500)
     .on('tick', tick)
 
@@ -133,48 +133,52 @@ d3.json("/nodes.json", function(error, json1) {
           }
       }
            )
-      .style('fill', function(d) {
-        if (d.type === "Dependent")
-          {
-            return"#f6f6f6" ;
-          }
-          else if (d.type === "Independent"){
-            return "#e8f3ff"; 
-          }
-          else {
-            return "#f77";
-          }
-      })
-      .classed('reflexive', function(d) { return d.reflexive; })
+           .style('fill', function(d) {
+             if (d.type === "Dependent")
+               {
+                 return"#eee" ;
+               }
+               else if (d.type === "Independent"){
+                 return "#e8f3ff"; 
+               }
+               else {
+                 return "#f77";
+               }
+           })
+           .classed('reflexive', function(d) { return d.reflexive; })
 
 
-      // show node IDs
-      g.append('svg:text')
-      .attr('x', 0)
-      .attr('y', function(d){
-        if (d.klass === "O")
-          {
-            return 4; 
-          }
+           // show node IDs
+           g.append('svg:text')
+           .attr('x', 0)
+           .attr('y', function(d){
+             if (d.klass === "O")
+               {
+                 return 4; 
+               }
 
-          else {
-            return -2;
-          }
-      })
-      .attr('class', 'id')
-      .text(function(d) { return d.name; });
-      g.append('svg:text')
-      .attr('x', 0)
-      .attr('y', 12)
-      .attr('class', 'id')
-      .text(function(d) { return d.mean; });
+               else {
+                 return 0;
+               }
+           })
+           .attr('class', 'id')
+           .text(function(d) { return d.name; });
+           g.append('svg:text')
+           .attr('x', 0)
+           .attr('y', 11)
+           .attr('class', 'id')
+           .text(function(d) {
+             if (d.klass === "D"){
+                 a = d.mean + "+-" + d.spread;
+                 return a;
+             }
+           });
 
+           // remove old nodes
+           circle.exit().remove();
 
-      // remove old nodes
-      circle.exit().remove();
-
-      // set the graph in motion
-      force.start();
+           // set the graph in motion
+           force.start();
     }
 
     function spliceLinksForNode(node) {
