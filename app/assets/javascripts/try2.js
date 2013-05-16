@@ -32,7 +32,7 @@ d3.json("/nodes.json", function(error, json1) {
     .links(links)
     .size([width, height])
     .linkDistance(120)
-    .charge(-500)
+    .charge(-600)
     .on('tick', tick)
 
     // define arrow markers for graph links
@@ -125,7 +125,7 @@ d3.json("/nodes.json", function(error, json1) {
       .attr('r', function(d){
         if (d.klass === "O")
           {
-            return "12"; 
+            return "16"; 
           }
 
           else {
