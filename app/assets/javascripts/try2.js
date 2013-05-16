@@ -1,5 +1,5 @@
 // set up SVG for D3
-var width  = 500,
+var width  = 550,
 height = 400,
 colors = d3.scale.category10();
 
@@ -31,7 +31,7 @@ d3.json("/nodes.json", function(error, json1) {
     .nodes(nodes)
     .links(links)
     .size([width, height])
-    .linkDistance(20)
+    .linkDistance(60)
     .charge(-600)
     .on('tick', tick)
 
@@ -40,8 +40,8 @@ d3.json("/nodes.json", function(error, json1) {
     .attr('id', 'end-arrow')
     .attr('viewBox', '0 -5 10 10')
     .attr('refX', 6)
-    .attr('markerWidth', 3)
-    .attr('markerHeight', 3)
+    .attr('markerWidth', 10)
+    .attr('markerHeight', 10)
     .attr('orient', 'auto')
     .append('svg:path')
     .attr('d', 'M0,-5L10,0L0,5')
@@ -57,11 +57,6 @@ d3.json("/nodes.json", function(error, json1) {
     .append('svg:path')
     .attr('d', 'M10,-5L0,0L10,5')
     .attr('fill', '#000');
-
-    // line displayed when dragging new nodes
-    var drag_line = svg.append('svg:path')
-    .attr('class', 'link dragline hidden')
-    .attr('d', 'M0,0L0,0');
 
     // handles to link and node element groups
     var path = svg.append('svg:g').selectAll('path'),
@@ -122,28 +117,58 @@ d3.json("/nodes.json", function(error, json1) {
       // NB: the function arg is crucial here! nodes are known by id, not by index!
       circle = circle.data(nodes, function(d) { return d.id; });
 
-      // update existing nodes (reflexive & selected visual states)
-      circle.selectAll('circle')
-      .style('fill', function(d) { return (d === selected_node) ? d3.rgb(colors(d.id)).brighter().toString() : colors(d.id); })
-      .classed('reflexive', function(d) { return d.reflexive; });
-
       // add new nodes
       var g = circle.enter().append('svg:g');
 
       g.append('svg:circle')
       .attr('class', 'node')
-      .attr('r', 6)
-      .style('fill', function(d) { return (d === selected_node) ? d3.rgb(colors(d.id)).brighter().toString() : colors(d.id); })
-      .style('stroke', function(d) { return d3.rgb(colors(d.id)).darker().toString(); })
+      .attr('r', function(d){
+        if (d.klass === "O")
+          {
+            return "8"; 
+          }
+
+          else {
+            return "5";
+          }
+      }
+           )
+      .style('fill', function(d) {
+        if (d.type === "Dependent")
+          {
+            return"#444" ;
+          }
+          else if (d.type === "Independent"){
+            return "#adf"; 
+          }
+          else {
+            return "#f77";
+          }
+      })
       .classed('reflexive', function(d) { return d.reflexive; })
 
 
       // show node IDs
       g.append('svg:text')
       .attr('x', 0)
-      .attr('y', 4)
+      .attr('y', function(d){
+        if (d.klass === "O")
+          {
+            return 4; 
+          }
+
+          else {
+            return -8;
+          }
+      })
       .attr('class', 'id')
       .text(function(d) { return d.name; });
+      g.append('svg:text')
+      .attr('x', 0)
+      .attr('y', -18)
+      .attr('class', 'id')
+      .text(function(d) { return d.mean; });
+
 
       // remove old nodes
       circle.exit().remove();

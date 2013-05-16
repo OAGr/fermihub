@@ -14,21 +14,13 @@ svg:not(.active):not(.ctrl) {
 
 path.link {
   fill: none;
-  stroke: #999;
+  stroke: #111;
   stroke-width: 1px;
   cursor: default;
 }
 
 svg:not(.active):not(.ctrl) path.link {
   cursor: pointer;
-}
-
-path.link.selected {
-  stroke-dasharray: 10,2;
-}
-
-path.link.dragline {
-  pointer-events: none;
 }
 
 path.link.hidden {
@@ -46,11 +38,12 @@ circle.node.reflexive {
 }
 
 text {
-  font: 12px sans-serif;
+  font: 11px sans-serif;
   pointer-events: none;
+  margin-bottom:10px;
+  padding-bottom:10px;
 }
 
 text.id {
   text-anchor: middle;
-  font-weight: bold;
 }
