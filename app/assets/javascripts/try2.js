@@ -2,7 +2,6 @@
 var width  = 550,
 height = 500,
 colors = d3.scale.category10();
-
 var svg = d3.select('.graph')
 .append('svg')
 .attr('width', width)
@@ -13,10 +12,10 @@ var svg = d3.select('.graph')
 //  - reflexive edges are indicated on the node (as a bold black circle).
 //  - links are always source < target; edge directions are set by 'left' and 'right'.
 
-d3.json("/nodes.json", function(error, json1) {
+d3.json("/models/1/nodes.json", function(error, json1) {
   lastNodeId = "2",
   nodes1 = json1;
-  d3.json("/edges.json", function(error, json2) {
+  d3.json("models/1/edges.json", function(error, json2) {
     links = json2,
     nodes = json1;
     console.log(nodes);

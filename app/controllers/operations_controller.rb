@@ -3,6 +3,7 @@ class OperationsController < ApplicationController
   # GET /operations.json
   def index
     @operations = Operation.all
+    @model = Model.find(params[:model_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class OperationsController < ApplicationController
   # GET /operations/1.json
   def show
     @operation = Operation.find(params[:id])
+    @model = Model.find(params[:model_id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,9 @@ class OperationsController < ApplicationController
   # GET /operations/new
   # GET /operations/new.json
   def new
+    @model = Model.find(params[:model_id])
     @operation = Operation.new
+    @distributions = @model.distributions
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +39,8 @@ class OperationsController < ApplicationController
   # GET /operations/1/edit
   def edit
     @operation = Operation.find(params[:id])
+    @model = Model.find(params[:model_id])
+    @distributions = @model.distributions
   end
 
   # POST /operations
@@ -42,10 +48,15 @@ class OperationsController < ApplicationController
   def create
     params[:operation]["inputs"] = filter_distribution_ids(params[:operation]["inputs"])
     @operation = Operation.new(params[:operation])
+    @model = Model.find(params[:model_id])
     respond_to do |format|
       if @operation.save
-        format.html { redirect_to root_path, notice: 'Operation was successfully created.' }
-        format.json { render json: @operation, status: :created, location: @operation }
+        if @model
+          @operation.dependent.models << @model
+          format.html { redirect_to model_path(@model), notice: 'Operation was successfully created.' }
+        else
+          format.html { redirect_to root_path, notice: 'Operation was successfully created.' }
+        end 
       else
         format.html { render action: "new" }
         format.json { render json: @operation.errors, status: :unprocessable_entity }
@@ -58,9 +69,10 @@ class OperationsController < ApplicationController
   def update
     @operation = Operation.find(params[:id])
     params[:operation]["inputs"] = filter_distribution_ids(params[:operation]["inputs"])
+    @model = Model.find(params[:model_id])
     respond_to do |format|
       if @operation.update_attributes(params[:operation])
-        format.html { redirect_to root_path, notice: 'Operation was successfully updated.' }
+        format.html { redirect_to model_path(@model), notice: 'Operation was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -73,10 +85,11 @@ class OperationsController < ApplicationController
   # DELETE /operations/1.json
   def destroy
     @operation = Operation.find(params[:id])
+    @model = Model.find(params[:model_id])
     @operation.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to model_path(@model) }
       format.json { head :no_content }
     end
   end
@@ -84,8 +97,9 @@ class OperationsController < ApplicationController
   def evaluate
     @operation = Operation.find(params[:id])
     @operation.evaluate!
+    @model = Model.find(params[:model_id])
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to model_path(@model) }
       format.json { head :no_content }
     end
   end

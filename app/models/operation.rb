@@ -3,7 +3,7 @@ class Operation < ActiveRecord::Base
   has_one :dependent, :class_name => "Dependent", :foreign_key => "operation_id", :dependent => :destroy
   has_and_belongs_to_many :inputs, :class_name => "Distribution"
   before_create :create_dependent
-  before_save :evaluate!
+  after_save :evaluate!
 
   def evaluate!
     unless inputs.empty?

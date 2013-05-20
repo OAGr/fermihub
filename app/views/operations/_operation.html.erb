@@ -1,13 +1,13 @@
 <div class="operation">
   <div class="header">
     <div class="right">
-  <%= link_to  evaluate_operation_path(operation), :method => :evaluate do%>
+  <%= link_to  evaluate_model_operation_path(@model, operation), :method => :evaluate do%>
         <i class="icon-cogs"></i> 
     <% end %>
-    <%= link_to edit_operation_path(operation) do %>
+    <%= link_to edit_model_operation_path(@model, operation) do %>
       <i class="icon-pencil"></i> 
   <% end %>
-    <%= link_to operation_path(operation),
+    <%= link_to model_operation_path(@model, operation),
       :method => :delete,
       :confirm => "Are you sure you want to delete this operation?" do %>
       <i class="icon-remove"></i> 

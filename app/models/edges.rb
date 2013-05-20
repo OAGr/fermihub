@@ -8,9 +8,15 @@ class Edge
     @right = true
   end
 
-  def self.all
+  def self.all(model_id = nil)
+    if model_id
+      model = Model.find(model_id)
+      operations = model.operations
+    else
+      operations = Operation.all
+    end
     edges = []
-    Operation.all.each do |operation|
+    operations.each do |operation|
       edges << Edge.new("O#{operation.id}", "D#{operation.dependent.id}")
       operation.inputs.each do |d1|
         edges << Edge.new( "D#{d1.id}", "O#{operation.id}")

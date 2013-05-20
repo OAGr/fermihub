@@ -1,8 +1,9 @@
 class PagesController < ApplicationController
   def home
-    @operations = Operation.all
-    @distributions = Distribution.all
-    @dependents = Dependent.all
-    @independents = Independent.all
+    @model = Model.first
+    @operations = @model.operations
+    @distributions = @model.distributions
+    @dependents = @model.dependents
+    @independents = @model.independents
   end
 end 

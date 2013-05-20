@@ -1,6 +1,7 @@
 require 'dis'
 class Distribution < ActiveRecord::Base
   has_and_belongs_to_many :outputs, :class_name => "Operation"
+  has_and_belongs_to_many :models
   attr_accessible :name, :mean, :spread, :wideness
   before_save :default_values
   after_save :output_evaluate!

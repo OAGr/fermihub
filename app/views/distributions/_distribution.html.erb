@@ -3,19 +3,19 @@
   <div class="header">
     <span class="name"> <%= distribution.name || '' %> </span>
     <span class="right">
-      <%= link_to edit_distribution_path(distribution) do %>
+      <%= link_to edit_model_distribution_path(model, distribution) do %>
         <i class="icon-pencil"></i> 
     <% end %> 
 
       <% if local_assigns[:operation] %>
-        <%= link_to  destroy_connection_distribution_path(distribution, :distribution => distribution.id, :operation => operation.id), :method => :destroy_connection do %>
+        <%= link_to  destroy_connection_model_distribution_path(model, distribution, :distribution => distribution.id, :operation => operation.id), :method => :destroy_connection do %>
         <i class="icon-unlink"></i> 
     <% end %>
 
     <% else %>
 
         <% if distribution.class == Independent %>
-        <%= link_to distribution_path(distribution),
+        <%= link_to model_distribution_path(model, distribution),
           :method => :delete,
           :confirm => 'Are you sure?' do%>
           <i class="icon-remove"></i> 

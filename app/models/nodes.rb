@@ -11,9 +11,17 @@ class Node
     @reflexive = false
   end
 
-  def self.all
-    nodes = Distribution.all.map {|d| Node.new("D#{d.id}", d.name, 'D', d.mean, d.spread,d.type)}
-    nodes += Operation.all.map {|d| Node.new("O#{d.id}" ,d.operator, 'O')}
+  def self.all(model_id = nil)
+    if model_id
+      model = Model.find(model_id)
+      distributions = model.distributions
+      operations = model.operations
+    else
+      distributions = Distribution.all
+      operations = Operation.all
+    end
+    nodes = distributions.map {|d| Node.new("D#{d.id}", d.name, 'D', d.mean, d.spread,d.type)}
+    nodes += operations.map {|d| Node.new("O#{d.id}" ,d.operator, 'O')}
     return nodes
   end
 
