@@ -40,7 +40,7 @@ class OperationsController < ApplicationController
   def edit
     @operation = Operation.find(params[:id])
     @model = Model.find(params[:model_id])
-    @distributions = @model.distributions
+    @distributions = @model.distributions - [@operation.dependent]
   end
 
   # POST /operations

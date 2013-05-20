@@ -25,7 +25,7 @@ class ModelsController < ApplicationController
   # GET /models/new
   # GET /models/new.json
   def new
-    @model = Independent.new
+    @model = Model.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,10 +41,10 @@ class ModelsController < ApplicationController
   # POST /Models
   # POST /Models.json
   def create
-    @model = Independent.new(params[:independent])
+    @model = Model.new(params[:model])
     respond_to do |format|
       if @model.save
-        format.html { redirect_to root_path, notice: 'model was successfully created.' }
+        format.html { redirect_to model_path(@model), notice: 'model was successfully created.' }
         format.json { render json: @model, status: :created, location: @model }
       else
         format.html { render action: "new" }
@@ -57,10 +57,9 @@ class ModelsController < ApplicationController
   # PUT /models/1.json
   def update
     @model = Model.find(params[:id])
-    type_params = params[:model] || params[:independent] || params[:dependent]
     respond_to do |format|
-      if @model.update_attributes(type_params)
-        format.html { redirect_to root_path, notice: 'model was successfully updated.' }
+      if @model.update_attributes(params[:model])
+        format.html { redirect_to model_path(@model), notice: 'model was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
