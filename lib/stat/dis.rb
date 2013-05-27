@@ -16,6 +16,10 @@ class Dis
     Dis.*(self,other)
   end
 
+  def |(other)
+    Dis.|(self,other)
+  end
+
   def to_dis
     self
   end
@@ -62,6 +66,37 @@ class Dis
 
     Dis.new(total_mean,total_interval)
   end
+
+  def self.|(*items)
+    return items[0].clone if (items.length == 1)
+
+    items = Dis.make_dis(*items)
+
+    intervals = items.map{|item| item.interval}
+    total_interval = intervals.map{|interval| (interval.to_f ** -2)}.inject{|sum, i| sum + i}
+
+    means = items.map{|item| item.mean.to_f * (item.interval.to_f ** -2)}
+    total_mean = means.inject{|sum,i| sum + i} / total_interval
+
+    final_interval = total_interval ** -(0.5)
+
+    Dis.new(total_mean,final_interval)
+  end
+
+  def self.max(*items)
+    return items[0].clone if (items.length == 1)
+    items = Dis.make_dis(*items)
+    max = items.max_by { |d| d.mean }
+    return max.clone
+  end
+
+  def self.min(*items)
+    return items[0].clone if (items.length == 1)
+    items = Dis.make_dis(*items)
+    min = items.min_by { |d| d.mean }
+    return min.clone
+  end
+
 
   def self.make_dis(*items)
     items.map! do |item|

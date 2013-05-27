@@ -1,6 +1,7 @@
 Fermi::Application.routes.draw do
 
   root :to => "pages#home"
+  get "operations" => "pages#operations"
 
   resources :nodes
   resources :edges

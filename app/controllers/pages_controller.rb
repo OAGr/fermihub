@@ -6,4 +6,8 @@ class PagesController < ApplicationController
     @dependents = @model.dependents
     @independents = @model.independents
   end
+
+  def operations
+
+  end
 end 

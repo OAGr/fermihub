@@ -24,8 +24,9 @@
         <% end %>
         </span>
       </div>
-
       <div class="body">
-        <%= distribution.to_num %>
+        <%= distribution.round(distribution.mean)%>
+        &plusmn; <%= distribution.round(distribution.spread)%>
+
       </div>
     </div>

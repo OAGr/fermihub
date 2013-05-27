@@ -19,6 +19,12 @@ class Operation < ActiveRecord::Base
       multiply
     when "+"
       add
+    when "|"
+      average
+    when "min"
+      min
+    when "max"
+      max
     when nil
       raise 'nil operator'
     else
@@ -34,6 +40,18 @@ class Operation < ActiveRecord::Base
     dis = inputs.map{|input| input.to_dis}
     Dis.+(*dis)
   end
+  def average
+    dis = inputs.map{|input| input.to_dis}
+    Dis.|(*dis)
+  end
+  def max
+    dis = inputs.map{|input| input.to_dis}
+    Dis.max(*dis)
+  end
+  def min
+    dis = inputs.map{|input| input.to_dis}
+    Dis.min(*dis)
+  end
 
   def list
     string = ""
@@ -45,8 +63,16 @@ class Operation < ActiveRecord::Base
     string << "Output: \n#{self.dependent.to_num}"
     return string
   end
+
   def equation
     input_eq = inputs.map{|input| input.to_num}.join(" #{operator} ")
     output_eq = "(#{input_eq}) = #{dependent.to_num}"
+  end
+
+end
+
+class Float
+  def signif(signs)
+    Float("%.#{signs}g" % self)
   end
 end

@@ -1,5 +1,9 @@
 require 'dis'
+#encoding: utf-8
+#!/bin/env ruby
+# encoding: utf-8
 class Distribution < ActiveRecord::Base
+  SIGNIFICANT_DIGITS = 8
   has_and_belongs_to_many :outputs, :class_name => "Operation"
   has_and_belongs_to_many :models
   attr_accessible :name, :mean, :spread, :wideness
@@ -21,6 +25,14 @@ class Distribution < ActiveRecord::Base
     name || to_num
   end
   def to_num
-    "#{mean}+-#{spread}"
+    #!/bin/env ruby
+# encoding: utf-8
+    "#{round(mean)} +- #{round(spread)}"
+  end
+  "%.4g" % 1342254513
+
+
+  def round(float)
+    "%.#{SIGNIFICANT_DIGITS}g" % float
   end
 end
