@@ -4,19 +4,19 @@
     <span class="name"> <%= distribution.name || '' %> </span>
     <% if model_user?(model) %>
       <span class="right">
-      <%= link_to edit_user_model_distribution_path(@user, model, distribution) do %>
+      <%= link_to edit_user_model_distribution_path(model.user, model, distribution) do %>
         <i class="icon-pencil"></i> 
     <% end %> 
 
       <% if local_assigns[:operation] %>
-        <%= link_to  destroy_connection_user_model_distribution_path(@user, model, distribution, :distribution => distribution.id, :operation => operation.id), :method => :destroy_connection do %>
+        <%= link_to  destroy_connection_user_model_distribution_path(model.user, model, distribution, :distribution => distribution.id, :operation => operation.id), :method => :destroy_connection do %>
         <i class="icon-unlink"></i> 
     <% end %>
 
     <% else %>
 
         <% if distribution.class == Independent %>
-        <%= link_to user_model_distribution_path(@user, model, distribution),
+        <%= link_to user_model_distribution_path(model.user, model, distribution),
           :method => :delete,
           :confirm => 'Are you sure?' do%>
           <i class="icon-remove"></i> 
