@@ -5,13 +5,8 @@ Fermi::Application.routes.draw do
   root :to => "pages#home"
   get "operations" => "pages#operations"
 
-  resources :nodes
-  resources :edges
-
   resources :users do
     resources :models do
-      resources :nodes
-      resources :edges
 
       resources :distributions do
         member do
