@@ -2,10 +2,10 @@
   <div class="header">
     <% if model_user?(@model) %>
     <div class="right">
-    <%= link_to edit_user_model_operation_path(@user, @model, operation) do %>
+    <%= link_to edit_user_model_operation_path(@model.user, @model, operation) do %>
       <i class="icon-pencil"></i> 
   <% end %>
-    <%= link_to user_model_operation_path(@user, @model, operation),
+    <%= link_to user_model_operation_path(@model.user, @model, operation),
       :method => :delete,
       :confirm => "Are you sure you want to delete this operation?" do %>
       <i class="icon-remove"></i> 
