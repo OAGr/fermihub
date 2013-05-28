@@ -1,10 +1,14 @@
+<h2> My Subgraphs <%= link_to 'new', new_model_path, :class => "btn btn-small" %> </h2>
+
+<br><br>
+
 <% @models.each do |model| %>
   <h4><%= link_to model.name || 'asd', model %></h4>
-     <div class="row">
-      <% model.dependents.each do |distribution| %>
-        <div class="span2">
-          <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution, :model => model}  %>
-      </div>
-    <% end %>
-    </div>
+<div class="row">
+  <% model.dependents.each do |distribution| %>
+    <div class="span2">
+    <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution, :model => model}  %>
+  </div>
+<% end %>
+</div>
 <% end %>

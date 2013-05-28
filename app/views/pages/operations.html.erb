@@ -1,4 +1,9 @@
 <h2> Operations </h2>
+<p> Fermihub currently allows the use of the following operations.  Each is described below, with resulting mean and standard deviation of the operation on the sample input distributions.  Sample input distributions are shown on bottom of the page.</p>
+<br>
+
+<h3> Operation Types </h3>
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -11,39 +16,71 @@
   </thead>
   <tbody>
   <tr>
-    <td class="success">+</td>
+    <td style="text-align:center"><span style="font-size:42px; color:#555; font-weight:800">+</span></td>
     <td>Addition</td>
     <td>Adds distributions together.  Input means are added to result in the output mean, and input confidence intervals are added to result in the output confidence interval. </td>
+    <td>8</td>
     <td>4</td>
-    <td>2</td>
   </tr>
   <tr>
-    <td>*</td>
+    <td style="text-align:center"><span style="font-size:60px; line-height:50px; color:#555; font-weight:800">*</span></td>
     <td>Multiplication</td>
     <td> Multiplies distributions together.  Input means are multiplied to result in the output mean, and input confidence intervals are added as fractions of their respective means to result in the output confidence interval.</td>
-    <td>4</td>
-    <td>2</td>
+    <td>15</td>
+    <td>14</td>
   </tr>
   <tr>
-    <td>|</td>
+    <td style="text-align:center" ><span style="font-size:30px; color:#555; font-weight:800">|</span></td>
     <td>Combination</td>
     <td> Combines multiple probabilitiy distributions estimating the same thing.  This is done by essentially perfoming a bayesian upate with the first as a prior and the second as a separate estimate.  This is useful when combining multiple estimates of the same variable.  The math is rather complicated, but is outlined <a href="http://blog.givewell.org/attachments/worms.pdf">here</a> and <a href="http://lesswrong.com/lw/745/why_we_cant_take_expected_value_estimates/">here</a>.  The mean is "equal to the the average of the two means weighted by their inverse variances", and the variance is "equal to the harmonic sum of the two variances". I am not entirely sure of this math and if you have recommendations on how to improve it let me know. </td>
-    <td>4</td>
-    <td>2</td>
+    <td>3.2</td>
+    <td>0.95</td>
   </tr>
   <tr>
-    <td>max</td>
+    <td style="text-align:center"><span style="font-size:25px; color:#555; font-weight:800">max</span></td>
     <td>Maximum</td>
     <td>Selects the distribution with the highest mean. </td>
-    <td>4</td>
-    <td>2</td>
+    <td>5</td>
+    <td>3</td>
   </tr>
   <tr>
-    <td>min</td>
+    <td style="text-align:center"><span style="font-size:25px; color:#555; font-weight:800">min</span></td>
     <td>Minimum</td>
     <td>Selects the distribution with the lowest mean. </td>
-    <td>4</td>
-    <td>2</td>
+    <td>3</td>
+    <td>1</td>
   </tr>
   </tbody>
 </table>
+
+<hr>
+<div class="row">
+  <div class="span4">
+    <h4> Sample Input Distributions </h4>
+    <p> These distributions are two examples.  The result of both under each different operation is shown in the table above. </p>
+  </div>
+  <div class="span5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Mean</th>
+          <th>Standard Deviation</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td> Distribution 1 </td>
+        <td>3</td>
+        <td>1</td>
+      </tr>
+
+      <tr>
+        <td>Distribution 2</td>
+        <td>5</td>
+        <td>3</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

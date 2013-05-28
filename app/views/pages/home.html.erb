@@ -1,68 +1,94 @@
-<div class="row">
-
-  <div class="span6">
-    <div class="graph" style="min-width:405px;min-height:405px;">
-    </div>
-  </div>
-
-
+<h1 style="text-align:center; font-size:76px; line-height:75px">
+  Estimate Everything! </h1>
+<br>
+<div style="text-align:center">
+  <img src="assets/laboratory.jpg" class="img-rounded" style="height:300px">
 </div>
+<h3 style="color:#666; text-align:center"> Don't do <a href="https://en.wikipedia.org/wiki/Fermi_problem">Fermi estimates</a> without confidence intervals.  Use Fermihub to keep track of Fermi estimates and their resulting uncertainties. </h3>
+<hr>
 <div class="row">
-  <div class="span5" style="padding-right:30px; border-right:1px solid #ccc">
-    <h3> Operations
-      <%= link_to "New", new_model_operation_path(@model), :class => "btn btn-small" %>
-    </h4>
+
+  <div class="span4">
+    <h3> Calculate Fermi Problems </h3>
+    <p> Estimating the number of piano tuners in Boston or the value of information from purchasing a microwave?  Plug your model into Fermihub and keep track of the outcomes and resulting certainty levels.</p>
+  </div>
+  <div class="span4">
+    <h3> Collaborate on Fermi Problems</h3>
+    <p> Want to combine estimates with a friend, and then plug them into another Fermi Problem?  Fermihub does that.  Share and collaborate on models to help inform others. </p>
+  </div>
+  <div class="span4">
+    <h3> Make Important Life Decisions </h3>
+    <p> Combine estimates from all of your models (and those of friends) to make life decisions. </p>
+  </div>
+</div>
+<br>
+<hr>
+<h3 style="text-align:center; font-size:40px; line-height:75px">
+  An Example Subgraph </h3>
+<br>
+<div class="row">
+  <div class="span12">
     <div class="row">
-      <div class="span2">
-        <h5> Inputs </h5>
-      </div>
-      <div class="span1">
-        <h5> Operator </h5>
-      </div>
-      <div class="span2">
-        <h5> Output </h5>
-      </div>
-    </div>
-    <% @operations.each do |operation| %>
-      <div class="row">
-      <div class="span2">
-        <% operation.inputs.each do |input| %>
+      <div class="span5" style="padding-right:30px; border-right:1px solid #ccc">
+        <h3> Operations</h3>
+        <p>Operations are simple equations with multiple inputs and one output. Add inputs by hovering over the operator and clicking "edit". Run the operation by clicking evaluate (the gear sign) on the operator.
+        <br><br>
+        Right now Fermihub supports only addition and multiplication, and calculates the error poorly. It also requires at least two inputs per operation.</p>
+        <div class="row">
+          <div class="span2">
+            <h5> Inputs </h5>
+          </div>
+          <div class="span1">
+            <h5> Operator </h5>
+          </div>
+          <div class="span2">
+            <h5> Output </h5>
+          </div>
+        </div>
+        <% @operations.each do |operation| %>
           <div class="row">
           <div class="span2">
-            <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => input, :operation => operation, :model => @model}  %>
-          </div><!--/row-->
-        </div><!--/row-->
+            <% operation.inputs.each do |input| %>
+              <div class="row">
+              <div class="span2">
+                <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => input, :operation => operation, :model => @model}  %>
+              </div><!--/row-->
+            </div><!--/row-->
+          <% end %>
+          </div>
+          <div class="span1">
+            <%= render operation %>
+          </div>
+          <div class="span2">
+            <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => operation.dependent, :model => @model}  %>
+          </div>
+        </div>
+        <hr style="margin:10px 0 0 0; border:none">
       <% end %>
       </div>
-      <div class="span1">
-        <%= render operation %>
+      <div class="span6">
+        <h3> Distributions 
+        </h3>
+        <p>Think of Distributions as variables with confidence intervals. The only confidence interval possible right now is one standard deviation, assuming gaussian distributions.
+
+        All Fermihub data is currently public and publically editable.</p>
+        <h5> Independent Distributions  <span style="color:#666; font-weight:normal">(You can change these)</span></h5>
+        <div class="row">
+          <% @independents.each do |distribution| %>
+            <div class="span2">
+            <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution, :model => @model}  %>
+          </div>
+        <% end %>
+        </div>
+        <h5> Dependent Distributions <span style="color:#666; font-weight:normal">(Outputs of the operations)</span></h5>
+        <div class="row">
+          <% @dependents.each do |distribution| %>
+            <div class="span2">
+            <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution, :model => @model}  %>
+          </div>
+        <% end %>
+        </div>
       </div>
-      <div class="span2">
-        <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => operation.dependent, :model => @model}  %>
-      </div>
-    </div>
-    <hr style="margin:10px 0 0 0; border:none">
-  <% end %>
-  </div>
-  <div class="span6">
-    <h3> Distributions 
-      <%= link_to "New", new_model_independent_path(@model), :class => "btn btn-small" %>
-    </h3>
-    <h5> Independent Distributions  <span style="color:#666; font-weight:normal">(You can change these)</span></h5>
-    <div class="row">
-      <% @independents.each do |distribution| %>
-        <div class="span2">
-          <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution, :model => @model}  %>
-      </div>
-    <% end %>
-    </div>
-    <h5> Dependent Distributions <span style="color:#666; font-weight:normal">(Outputs of the operations)</span></h5>
-    <div class="row">
-      <% @dependents.each do |distribution| %>
-        <div class="span2">
-          <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution, :model => @model}  %>
-      </div>
-    <% end %>
     </div>
 
   </div>
