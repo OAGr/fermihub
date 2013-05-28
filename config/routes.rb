@@ -1,6 +1,6 @@
 Fermi::Application.routes.draw do
 
-  devise_for :users, :path => 'accounts'
+  devise_for :users, :path => 'accounts', :controllers => { :registrations => "registrations" }
 
   root :to => "pages#home"
   get "operations" => "pages#operations"

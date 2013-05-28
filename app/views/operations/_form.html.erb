@@ -1,4 +1,5 @@
 <%= form_for [@user,@model,@operation], :html => { :class => 'form-horizontal' } do |f| %>
+
   <div class="control-group">
     <%= f.label :operator, :class => 'control-label' %>
     <div class="controls">
@@ -15,3 +16,51 @@
     <%= f.submit nil, :class => 'btn btn-primary' %>
   </div>
 <% end %>
+
+<hr>
+<h2> Operations Types Reference</h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Name</th>
+      <th>Explanation</th>
+      <th style="min-width:200px">Example Equation</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td style="text-align:center"><span style="font-size:42px; color:#555; font-weight:800">+</span></td>
+    <td>Addition</td>
+    <td>Adds distributions together.  Input means are added to result in the output mean, and input confidence intervals are added to result in the output confidence interval. </td>
+    <td>(3 ± 1) + (5 ± 3) = (8 ± 4)</td>
+  </tr>
+  <tr>
+    <td style="text-align:center"><span style="font-size:60px; line-height:50px; color:#555; font-weight:800">*</span></td>
+    <td>Multiplication</td>
+    <td> Multiplies distributions together.  Input means are multiplied to result in the output mean, and input confidence intervals are added as fractions of their respective means to result in the output confidence interval.</td>
+    <td>(3 ± 1) * (5 ± 3) = (15 ± 14)</td>
+  </tr>
+  <tr>
+    <td style="text-align:center" ><span style="font-size:30px; color:#555; font-weight:800">|</span></td>
+    <td>Combination</td>
+    <td> Combines multiple probabilitiy distributions estimating the same thing.  This is done by essentially perfoming a bayesian upate with the first as a prior and the second as a separate estimate.  This is useful when combining multiple estimates of the same variable.  The math is rather complicated, but is outlined <a href="http://blog.givewell.org/attachments/worms.pdf">here</a> and <a href="http://lesswrong.com/lw/745/why_we_cant_take_expected_value_estimates/">here</a>.  The mean is "equal to the the average of the two means weighted by their inverse variances", and the variance is "equal to the harmonic sum of the two variances". I am not entirely sure of this math and if you have recommendations on how to improve it let me know. </td>
+    <td>(3 ± 1) | (5 ± 3) = (3.2 ± 0.95)</td>
+  </tr>
+  <tr>
+    <td style="text-align:center"><span style="font-size:25px; color:#555; font-weight:800">max</span></td>
+    <td>Maximum</td>
+    <td>Selects the distribution with the highest mean. </td>
+    <td>(3 ± 1) max (5 ± 3) = (5 ± 3)</td>
+  </tr>
+  <tr>
+    <td style="text-align:center"><span style="font-size:25px; color:#555; font-weight:800">min</span></td>
+    <td>Minimum</td>
+    <td>Selects the distribution with the lowest mean. </td>
+    <td>(3 ± 1) min (5 ± 3) = (3 ± 1)</td>
+  </tr>
+  </tbody>
+</table>
+
+

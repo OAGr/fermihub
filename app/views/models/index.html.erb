@@ -1,5 +1,5 @@
-<h2> <%= @user.name.nil? ? "User's" : "#{@user.name}'s" %> Models 
-<%= link_to 'new', new_user_model_path, :class => "btn btn-small" if current_user == @user%> </h2>
+<h2> <%= @user.name.nil? ? "User's" : "#{@user.name}'s" %> Models <%= link_to 'New Model', new_user_model_path, :class => "btn btn-primary" if current_user == @user%> </h2>
+
 
 <br><br>
 

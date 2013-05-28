@@ -1,11 +1,44 @@
 <h2> <%= @model.name %> 
 <%= link_to 'Edit', edit_user_model_path(@user, @model), :class => "btn btn-small" if model_user?(@model) %>
-<%= link_to 'Delete', user_model_path(@user, @model), :method => :delete, :confirm => "Are you sure you want to destroy this model?", :class => "btn btn-small btn-danger" if model_user?(@model)%> 
- </h2>
+  <%= link_to 'Delete', user_model_path(@user, @model), :method => :delete, :confirm => "Are you sure you want to destroy this model?", :class => "btn btn-small btn-danger" if model_user?(@model)%> 
+</h2>
+<hr>
 <div class="row">
-  <div class="span5" style="padding-right:30px; border-right:1px solid #ccc">
+  <div class="span6"  style="padding-right:30px; border-right:1px solid #ccc">
+    <h3> Distributions 
+    
+    </h3>
+    <h5> Independent Distributions  <span style="color:#666; font-weight:normal">(You can change these)</span></h5>
+  <%= link_to "New", new_user_model_independent_path(@user, @model), :class => "btn btn-small btn-primary" if model_user?(@model) %>
+  <br><br>
+    <div class="row">
+      <% @independents.each do |distribution| %>
+        <div class="span2">
+        <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution, :model => @model}  %>
+      </div>
+    <% end %>
+    </div>
+    <h5> Dependent Distributions <span style="color:#666; font-weight:normal">(Outputs of the operations)</span></h5>
+    <div class="row">
+      <% @dependents.each do |distribution| %>
+        <div class="span2">
+        <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution, :model => @model}  %>
+      </div>
+    <% end %>
+    </div>
+
+    <hr style="margin:10px 0 0 0; border:none">
+  </div>
+
+
+  <div class="span5">
     <h3> Operations
-      <%= link_to "New", new_user_model_operation_path(@user, @model), :class => "btn btn-small" if model_user?(@model) %>
+      <% if @independents.size > 0 %>
+        <%= link_to "New", new_user_model_operation_path(@user, @model), :class => "btn btn-primary btn-small" if model_user?(@model) %>
+    <% else %>
+        <a href="#" class="btn disabled"> Add Distributions To Begin </a>
+    <% end %>
+
     </h4>
     <div class="row">
       <div class="span2">
@@ -36,32 +69,8 @@
         <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => operation.dependent, :model => @model}  %>
       </div>
     </div>
-    <hr style="margin:10px 0 0 0; border:none">
   <% end %>
   </div>
-  <div class="span6">
-    <h3> Distributions 
-      <%= link_to "New", new_user_model_independent_path(@user, @model), :class => "btn btn-small" if model_user?(@model) %>
-    </h3>
-    <h5> Independent Distributions  <span style="color:#666; font-weight:normal">(You can change these)</span></h5>
-    <div class="row">
-      <% @independents.each do |distribution| %>
-        <div class="span2">
-          <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution, :model => @model}  %>
-      </div>
-    <% end %>
-    </div>
-    <h5> Dependent Distributions <span style="color:#666; font-weight:normal">(Outputs of the operations)</span></h5>
-    <div class="row">
-      <% @dependents.each do |distribution| %>
-        <div class="span2">
-          <%= render :partial => 'distributions/distribution.html.erb', :locals =>{:distribution => distribution, :model => @model}  %>
-      </div>
-    <% end %>
-    </div>
-
-  </div>
-
 
 </div>
 
