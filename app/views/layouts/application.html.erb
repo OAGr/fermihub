@@ -30,13 +30,13 @@
       <% end %>
           <ul class="nav">
         <li> <%= link_to "Operations", operations_path %> </li>
+        <li> <%= link_to  "Github", "https://github.com/OAGr/fermihub/"%></li>
       </ul>
       <ul class="nav pull-right">
         <% if user_signed_in? %>
         <li> <%= link_to "New Subgraph", new_user_model_path(current_user) %> </li>
         <li> <%= link_to "My Subgraphs", user_models_path(current_user) %> </li>
       <% end %>
-        <li> <%= link_to  "Code on Github", "https://github.com/OAGr/fermihub/"%></li>
         <li class="dropdown clearfix">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <i class="icon-user"></i>
