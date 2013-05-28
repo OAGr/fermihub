@@ -1,8 +1,8 @@
-<h2> <%= @model.name %> <%= link_to 'Edit', edit_model_path(@model), :class => "btn btn-small" %> </h2>
+<h2> <%= @model.name %> <%= link_to 'Edit', edit_user_model_path(@user, @model), :class => "btn btn-small" if model_user?(@model) %> </h2>
 <div class="row">
   <div class="span5" style="padding-right:30px; border-right:1px solid #ccc">
     <h3> Operations
-      <%= link_to "New", new_model_operation_path(@model), :class => "btn btn-small" %>
+      <%= link_to "New", new_user_model_operation_path(@user, @model), :class => "btn btn-small" if model_user?(@model) %>
     </h4>
     <div class="row">
       <div class="span2">
@@ -38,7 +38,7 @@
   </div>
   <div class="span6">
     <h3> Distributions 
-      <%= link_to "New", new_model_independent_path(@model), :class => "btn btn-small" %>
+      <%= link_to "New", new_user_model_independent_path(@user, @model), :class => "btn btn-small" if model_user?(@model) %>
     </h3>
     <h5> Independent Distributions  <span style="color:#666; font-weight:normal">(You can change these)</span></h5>
     <div class="row">

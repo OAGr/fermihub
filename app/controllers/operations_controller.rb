@@ -26,6 +26,7 @@ class OperationsController < ApplicationController
   # GET /operations/new
   # GET /operations/new.json
   def new
+    @user = current_user
     @model = Model.find(params[:model_id])
     @operation = Operation.new
     @distributions = @model.distributions
@@ -40,6 +41,7 @@ class OperationsController < ApplicationController
   def edit
     @operation = Operation.find(params[:id])
     @model = Model.find(params[:model_id])
+    @user = @model.user
     @distributions = @model.distributions - [@operation.dependent]
   end
 
@@ -53,7 +55,7 @@ class OperationsController < ApplicationController
       if @operation.save
         if @model
           @operation.dependent.models << @model
-          format.html { redirect_to model_path(@model), notice: 'Operation was successfully created.' }
+          format.html { redirect_to user_model_path(@model.user, @model), notice: 'Operation was successfully created.' }
         else
           format.html { redirect_to root_path, notice: 'Operation was successfully created.' }
         end 
@@ -72,7 +74,7 @@ class OperationsController < ApplicationController
     @model = Model.find(params[:model_id])
     respond_to do |format|
       if @operation.update_attributes(params[:operation])
-        format.html { redirect_to model_path(@model), notice: 'Operation was successfully updated.' }
+        format.html { redirect_to user_model_path(@model.user,@model), notice: 'Operation was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

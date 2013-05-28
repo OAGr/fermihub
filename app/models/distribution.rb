@@ -31,8 +31,7 @@ class Distribution < ActiveRecord::Base
   end
   "%.4g" % 1342254513
 
-
   def round(float)
-    "%.#{SIGNIFICANT_DIGITS}g" % float
+   float.nil? ? "0" : "%.#{SIGNIFICANT_DIGITS}g" % float
   end
 end

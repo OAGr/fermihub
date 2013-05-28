@@ -2,8 +2,8 @@ class ModelsController < ApplicationController
   # GET /models
   # GET /models.json
   def index
+    @user = User.find(params[:user_id])
     @models = Model.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @models }
@@ -12,6 +12,7 @@ class ModelsController < ApplicationController
 
   def show
     @model = Model.find(params[:id])
+    @user = User.find(params[:user_id])
     @operations = @model.operations
     @independents = @model.independents
     @dependents = @model.dependents
@@ -25,6 +26,7 @@ class ModelsController < ApplicationController
   # GET /models/new
   # GET /models/new.json
   def new
+    @user = current_user
     @model = Model.new
 
     respond_to do |format|
@@ -41,10 +43,11 @@ class ModelsController < ApplicationController
   # POST /Models
   # POST /Models.json
   def create
+    @user = current_user
     @model = Model.new(params[:model])
     respond_to do |format|
       if @model.save
-        format.html { redirect_to model_path(@model), notice: 'model was successfully created.' }
+        format.html { redirect_to user_model_path(@user, @model), notice: 'model was successfully created.' }
         format.json { render json: @model, status: :created, location: @model }
       else
         format.html { render action: "new" }

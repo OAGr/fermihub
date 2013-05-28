@@ -1,9 +1,10 @@
-<h2> My Subgraphs <%= link_to 'new', new_model_path, :class => "btn btn-small" %> </h2>
+<h2> User Subgraphs 
+<%= link_to 'new', new_user_model_path, :class => "btn btn-small" if current_user == @user%> </h2>
 
 <br><br>
 
 <% @models.each do |model| %>
-  <h4><%= link_to model.name || 'asd', model %></h4>
+  <h4><%= link_to model.name || 'asd', user_model_path(@user, model.id) %></h4>
 <div class="row">
   <% model.dependents.each do |distribution| %>
     <div class="span2">

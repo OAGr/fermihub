@@ -2,20 +2,21 @@
 <div class="distribution <%= distribution.type.to_s.downcase %>">
   <div class="header">
     <span class="name"> <%= distribution.name || '' %> </span>
-    <span class="right">
-      <%= link_to edit_model_distribution_path(model, distribution) do %>
+    <% if model_user?(model) %>
+      <span class="right">
+      <%= link_to edit_user_model_distribution_path(@user, model, distribution) do %>
         <i class="icon-pencil"></i> 
     <% end %> 
 
       <% if local_assigns[:operation] %>
-        <%= link_to  destroy_connection_model_distribution_path(model, distribution, :distribution => distribution.id, :operation => operation.id), :method => :destroy_connection do %>
+        <%= link_to  destroy_connection_user_model_distribution_path(@user, model, distribution, :distribution => distribution.id, :operation => operation.id), :method => :destroy_connection do %>
         <i class="icon-unlink"></i> 
     <% end %>
 
     <% else %>
 
         <% if distribution.class == Independent %>
-        <%= link_to model_distribution_path(model, distribution),
+        <%= link_to user_model_distribution_path(@user, model, distribution),
           :method => :delete,
           :confirm => 'Are you sure?' do%>
           <i class="icon-remove"></i> 
@@ -23,10 +24,12 @@
         <% end %>
         <% end %>
         </span>
+      <% end %>
+
       </div>
       <div class="body">
         <%= distribution.round(distribution.mean)%>
         &plusmn; <%= distribution.round(distribution.spread)%>
 
-      </div>
+    </div>
     </div>

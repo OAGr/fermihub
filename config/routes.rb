@@ -1,6 +1,6 @@
 Fermi::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :path => 'accounts'
 
   root :to => "pages#home"
   get "operations" => "pages#operations"
@@ -8,25 +8,27 @@ Fermi::Application.routes.draw do
   resources :nodes
   resources :edges
 
-  resources :models do
-    resources :nodes
-    resources :edges
+  resources :users do
+    resources :models do
+      resources :nodes
+      resources :edges
 
-    resources :distributions do
-      member do
-        post 'destroy_connection'
+      resources :distributions do
+        member do
+          post 'destroy_connection'
+        end
       end
-    end
 
-    resources :operations do
-      member do
-        post 'evaluate'
+      resources :operations do
+        member do
+          post 'evaluate'
+        end
       end
-    end
 
-    resources :dependents, :controller => "distributions", :type => "Dependent"
-    resources :independents, :controller => "distributions", :type => "Independent"
-  end 
+      resources :dependents, :controller => "distributions", :type => "Dependent"
+      resources :independents, :controller => "distributions", :type => "Independent"
+    end 
+  end
 
 
 
