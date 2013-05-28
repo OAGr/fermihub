@@ -3,7 +3,7 @@ class ModelsController < ApplicationController
   # GET /models.json
   def index
     @user = User.find(params[:user_id])
-    @models = Model.all
+    @models = @user.models
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @models }
@@ -38,6 +38,7 @@ class ModelsController < ApplicationController
   # GET /models/1/edit
   def edit
     @model = Model.find(params[:id])
+    @user = @model.user
   end
 
   # POST /Models
@@ -62,7 +63,7 @@ class ModelsController < ApplicationController
     @model = Model.find(params[:id])
     respond_to do |format|
       if @model.update_attributes(params[:model])
-        format.html { redirect_to model_path(@model), notice: 'model was successfully updated.' }
+        format.html { redirect_to user_model_path(@model.user, @model), notice: 'model was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -75,10 +76,11 @@ class ModelsController < ApplicationController
   # DELETE /models/1.json
   def destroy
     @model = Model.find(params[:id])
+    @user = @model.user
     @model.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to user_models_path(@user)  }
       format.json { head :no_content }
     end
   end

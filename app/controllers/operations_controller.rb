@@ -91,7 +91,7 @@ class OperationsController < ApplicationController
     @operation.destroy
 
     respond_to do |format|
-      format.html { redirect_to model_path(@model) }
+      format.html { redirect_to user_model_path(@model.user, @model) }
       format.json { head :no_content }
     end
   end
@@ -101,7 +101,7 @@ class OperationsController < ApplicationController
     @operation.evaluate!
     @model = Model.find(params[:model_id])
     respond_to do |format|
-      format.html { redirect_to model_path(@model) }
+      format.html { redirect_to user_model_path(@model.user, @model) }
       format.json { head :no_content }
     end
   end
